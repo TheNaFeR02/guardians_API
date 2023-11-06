@@ -7,7 +7,9 @@ from .views import UserDetailsView
 from authentication.views import email_confirm_redirect, password_reset_confirm_redirect
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import UserViewSet
+from .views import UserViewSet, CustomRegisterView
+
+
 
 router = DefaultRouter()
 router.register(r'user', UserViewSet,basename="user_details")
@@ -15,7 +17,10 @@ router.register(r'user', UserViewSet,basename="user_details")
 
 urlpatterns = [
     # URLs will come here
-    path("register/", RegisterView.as_view(), name="rest_register"),
+    # path("register/", RegisterView.as_view(), name="rest_register"),
+    path("register/", CustomRegisterView.as_view(), name="rest_register"),
+
+
     path("login/", LoginView.as_view(), name="rest_login"),
     path("logout/", LogoutView.as_view(), name="rest_logout"),
     # path("profile/", UserDetailsView.as_view(), name="rest_user_details"),

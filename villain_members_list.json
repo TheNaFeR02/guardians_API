@@ -1,0 +1,61 @@
+{
+    "error": "OK",
+    "limit": 1,
+    "offset": 0,
+    "number_of_page_results": 1,
+    "number_of_total_results": 1,
+    "status_code": 1,
+    "results": {
+        "character_enemies": [
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-41126/",
+                "id": 41126,
+                "name": "Battle Beast",
+                "site_detail_url": "https://comicvine.gamespot.com/battle-beast/4005-41126/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-41128/",
+                "id": 41128,
+                "name": "Bi-Plane",
+                "site_detail_url": "https://comicvine.gamespot.com/bi-plane/4005-41128/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-41164/",
+                "id": 41164,
+                "name": "Elephant",
+                "site_detail_url": "https://comicvine.gamespot.com/elephant/4005-41164/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-41163/",
+                "id": 41163,
+                "name": "Furnace",
+                "site_detail_url": "https://comicvine.gamespot.com/furnace/4005-41163/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-42570/",
+                "id": 42570,
+                "name": "Kursk",
+                "site_detail_url": "https://comicvine.gamespot.com/kursk/4005-42570/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-42571/",
+                "id": 42571,
+                "name": "Magnattack",
+                "site_detail_url": "https://comicvine.gamespot.com/magnattack/4005-42571/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-40550/",
+                "id": 40550,
+                "name": "Omni-Man",
+                "site_detail_url": "https://comicvine.gamespot.com/omni-man/4005-40550/"
+            },
+            {
+                "api_detail_url": "https://comicvine.gamespot.com/api/character/4005-4729/",
+                "id": 4729,
+                "name": "Titan",
+                "site_detail_url": "https://comicvine.gamespot.com/titan/4005-4729/"
+            }
+        ]
+    },
+    "version": "1.0"
+}

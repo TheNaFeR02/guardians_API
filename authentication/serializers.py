@@ -13,7 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CustomRegisterSerializer(RegisterSerializer):
     # Add or modify fields as needed
-    role = serializers.CharField()
+    oauth_provider = serializers.CharField(required=False)
+    oauth_user_id = serializers.CharField(required=False)
+
         
 
 

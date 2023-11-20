@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='hero',
             name='image_url',
-            field=models.ImageField(blank=True, null=True, upload_to=heroes.models.upload_to_2),
+            field=models.ImageField(blank=True, null=True, upload_to=heroes.models.upload_to),
         ),
     ]

@@ -338,15 +338,15 @@ def run():
     #     # if(i==1):
     #     #     break
     #     # i+=1
-    # for hero in members['team_members']:
-    #     # Assuming there's only one Hero with a given ID
-    #     obj = Hero.objects.get(id=int(hero['id']))
-    #     image_path = f'assets/images/heroes/{hero["id"]}_{hero["name"]}.jpg'
+    for hero in members['team_members']:
+        # Assuming there's only one Hero with a given ID
+        obj = Hero.objects.get(id=int(hero['id']))
+        image_path = f'assets/images/heroes/screen_large_url/{hero["id"]}_{hero["name"]}.jpg'
 
-    #     with open(image_path, 'rb') as image_file:
-    #         image = File(image_file)
-    #         obj.sponsors = image
-    #         obj.save()
+        with open(image_path, 'rb') as image_file:
+            image = File(image_file)
+            obj.image_screen_large_url = image
+            obj.save()
 
     # for villain in Villain.objects.all():
     #     image_path = f'assets/images/villains/{villain.id}_{villain.name}.jpg'

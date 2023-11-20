@@ -7,6 +7,7 @@ import random
 from django.core.files import File
 from heroes.models import Hero, Sponsor
 from villains.models import Villain
+from core import settings
 
 
 # To obtain an API Key from comicvine go to: https://comicvine.gamespot.com/api/
@@ -268,29 +269,41 @@ def create_sponsors_and_assign_to_heroes():
         sponsor = Sponsor(
             id=key,
             name=name,
-            amount=round(random.uniform(0,1000000),2),
+            amount=round(random.uniform(0, 1000000), 2),
         )
         sponsor.save()
 
     # Assign the sponsors to the heroes.
     heroes = Hero.objects.all()
 
-
     for hero in heroes:
-        if(hero.sponsors == None):
+        if (hero.sponsors == None):
             hero.sponsors = {}
-        
+
         # creating n new  num_sponsors.
-        k=0
-        num_sponsors = 4 # each hero has a maximum of 5 sponsors.
+        k = 0
+        num_sponsors = 4  # each hero has a maximum of 5 sponsors.
         while (k < num_sponsors):
             new_sponsor_key = random.randint(1, 20)
             # check if the hero doesn't have the sponsor already.
             if (new_sponsor_key not in hero.sponsors):
                 hero.sponsors[new_sponsor_key] = sponsors[new_sponsor_key]
                 hero.save()
-            k+=1
+            k += 1
         print(hero.sponsors)
+
+
+def image_to_sponsor():
+    sponsors = Sponsor.objects.all()
+
+    for sponsor in sponsors:
+
+        with open(f'assets/images/sponsors/{sponsor.name}.jpg', 'rb') as image_file:
+            image = File(image_file)
+            sponsor.image_url = image
+
+            sponsor.save()
+
 
 def run():
 
@@ -309,10 +322,65 @@ def run():
     # create_sponsors_and_assign_to_heroes()
 
     # create all of the sponsors.
+    # (put when creating sponsors) assign image to each sponsor.
+    # image_to_sponsor()
+    f = open('team_members_info_local.json')
+    members = json.load(f)
 
+    # # i=0
+    # for hero in members['team_members']:
+    #     obj = Hero.objects.filter(id=int(hero['id']))
+    #     with open(f'{settings.MEDIA_ROOT}/images/heroes/{hero["id"]}_{hero["name"]}.jpg', 'rb') as image_file:
+    #         image = File(image_file)
+    #         print(image)
+    #     obj.update(image_url=image)
+
+    #     # if(i==1):
+    #     #     break
+    #     # i+=1
+    # for hero in members['team_members']:
+    #     # Assuming there's only one Hero with a given ID
+    #     obj = Hero.objects.get(id=int(hero['id']))
+    #     image_path = f'assets/images/heroes/{hero["id"]}_{hero["name"]}.jpg'
+
+    #     with open(image_path, 'rb') as image_file:
+    #         image = File(image_file)
+    #         obj.sponsors = image
+    #         obj.save()
+
+    # for villain in Villain.objects.all():
+    #     image_path = f'assets/images/villains/{villain.id}_{villain.name}.jpg'
+
+    #     with open(image_path, 'rb') as image_file:
+    #         image = File(image_file)
+    #         villain.image_url = image
+    #         villain.save()
+
+
+    #-----------------------
+    # if not os.path.exists('assets/images/villains/screen_large_url'):
+    #     os.makedirs('assets/images/villains/screen_large_url')
+
+    # f = open('villain_members_info.json')
+
+    # members = json.load(f)
+
+    # for villain in members['villain_members']:
+    #     url = villain['image']['screen_large_url']
+
+    #     response = requests.get(url).content
+
+    #     with open(f'assets/images/villains/screen_large_url/{villain["id"]}_{villain["name"]}.jpg', 'wb') as image_file:
+    #         image_file.write(response)
+    # f.close()
     
-    pass
-    
-        
+    # for villain in Villain.objects.all():
+    #     image_path = f'assets/images/villains/screen_large_url/{villain.id}_{villain.name}.jpg'
+
+    #     with open(image_path, 'rb') as image_file:
+    #         image = File(image_file)
+    #         villain.image_screen_large_url = image
+    #         villain.save()
 
    
+    pass

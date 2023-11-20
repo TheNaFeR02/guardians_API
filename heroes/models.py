@@ -3,15 +3,22 @@ from villains.models import Villain
 # lets us explicitly set upload path and filename
 
 
+# def upload_to(instance, filename):
+#     return 'images/{filename}'.format(filename=filename)
+
 def upload_to(instance, filename):
-    return 'images/{filename}'.format(filename=filename)
+    return 'media/images/{filename}'.format(filename=filename)
+
+def upload_to_2(instance, filename):
+    return '{filename}'.format(filename=filename)
 
 
 class Hero(models.Model):
     id = models.IntegerField(unique=True, primary_key=True)
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank=True, null=True)
-    image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image_url = models.ImageField(upload_to=upload_to_2, blank=True, null=True)
+    image_screen_large_url = models.ImageField(upload_to=upload_to_2, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     character_friends = models.JSONField(blank=True, null=True)
     powers = models.JSONField(blank=True, null=True)
@@ -75,6 +82,7 @@ class Schedule(models.Model):
 class Sponsor(models.Model):
     id = models.IntegerField(unique=True, primary_key=True)
     name = models.CharField(max_length=100)
+    image_url = models.ImageField(upload_to=upload_to_2, blank=True, null=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     # ~ image
 

@@ -23,6 +23,7 @@ class FightViewSet(viewsets.ModelViewSet):
 class SponsorViewSet(viewsets.ModelViewSet):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
+    parser_classes = (MultiPartParser, FormParser)
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]        
 
 

@@ -6,4 +6,4 @@ class VillainSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Villain
-        fields = ('id', 'name', 'age', 'origin', 'image_url', 'description', 'character_enemies','powers','weaknesses')
+        fields = ('id', 'name', 'age', 'origin', 'image_url', 'image_screen_large_url', 'description', 'character_enemies','powers','weaknesses')

@@ -1,7 +1,7 @@
 from django.db import models
 
 def upload_to(instance, filename):
-    return 'images/{filename}'.format(filename=filename)
+    return '{filename}'.format(filename=filename)
 
 # Create your models here.
 class Villain(models.Model):
@@ -10,6 +10,7 @@ class Villain(models.Model):
     age = models.IntegerField(blank=True, null=True)
     origin = models.CharField(max_length=100)
     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image_screen_large_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     character_enemies = models.JSONField(blank=True, null=True)
     powers = models.JSONField(blank=True, null=True)

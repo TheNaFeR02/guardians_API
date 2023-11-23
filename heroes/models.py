@@ -70,6 +70,11 @@ class Relationship(models.Model):
 
 class Schedule(models.Model):
     hero = models.ForeignKey(Hero, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    start = models.CharField(max_length=100, blank=True, null=True)
+    end = models.CharField(max_length=100, blank=True, null=True)
+    color = models.CharField(max_length=50, blank=True, null=True)
+    # eventId = models.CharField(max_length=50, blank=True, null=True)
     # Include fields for managing schedules, school, and family meetings.
 
 

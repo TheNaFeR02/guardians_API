@@ -1,11 +1,12 @@
 # Guardians of the Globe.
 
+from datetime import datetime
 import json
 import os
 import requests
 import random
 from django.core.files import File
-from heroes.models import Hero, Sponsor
+from heroes.models import Hero, Sponsor, Schedule
 from villains.models import Villain
 from core import settings
 
@@ -324,8 +325,8 @@ def run():
     # create all of the sponsors.
     # (put when creating sponsors) assign image to each sponsor.
     # image_to_sponsor()
-    f = open('team_members_info_local.json')
-    members = json.load(f)
+    # f = open('team_members_info_local.json')
+    # members = json.load(f)
 
     # # i=0
     # for hero in members['team_members']:
@@ -338,15 +339,15 @@ def run():
     #     # if(i==1):
     #     #     break
     #     # i+=1
-    for hero in members['team_members']:
-        # Assuming there's only one Hero with a given ID
-        obj = Hero.objects.get(id=int(hero['id']))
-        image_path = f'assets/images/heroes/screen_large_url/{hero["id"]}_{hero["name"]}.jpg'
+    # for hero in members['team_members']:
+    #     # Assuming there's only one Hero with a given ID
+    #     obj = Hero.objects.get(id=int(hero['id']))
+    #     image_path = f'assets/images/heroes/screen_large_url/{hero["id"]}_{hero["name"]}.jpg'
 
-        with open(image_path, 'rb') as image_file:
-            image = File(image_file)
-            obj.image_screen_large_url = image
-            obj.save()
+    #     with open(image_path, 'rb') as image_file:
+    #         image = File(image_file)
+    #         obj.image_screen_large_url = image
+    #         obj.save()
 
     # for villain in Villain.objects.all():
     #     image_path = f'assets/images/villains/{villain.id}_{villain.name}.jpg'
@@ -381,6 +382,19 @@ def run():
     #         image = File(image_file)
     #         villain.image_screen_large_url = image
     #         villain.save()
+
+
+    # atom_eve = Hero.objects.filter(id=40947)
+    # atom_eve.update(age=18)
+
+
+
+    # Schedule.objects.create()
+    test_event = Schedule(hero=Hero.objects.get(id=5210), title='Lunch', start=datetime.now().isoformat()[:10]+"T13:00:00", end=datetime.now().isoformat()[:10]+"T15:00:00",color='#964B00')
+    test_event.save()
+
+
+
 
    
     pass

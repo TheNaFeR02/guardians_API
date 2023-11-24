@@ -16,8 +16,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# URL used to access the media
-# MEDIA_URL = '/media/'
+# URL used to access the media from the front. Commentate this when populating doing scripts.
+# MEDIA_URL = '/assets/ '
 
 # Actual directory user files go to
 # MEDIA_ROOT = os.path.join(os.path.basename(BASE_DIR), 'assets')

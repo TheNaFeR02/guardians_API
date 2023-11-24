@@ -19,9 +19,18 @@ class HeroNameSerializer(serializers.ModelSerializer):
 
 
 class FightSerializer(serializers.ModelSerializer):
+    hero_name = serializers.SerializerMethodField()
+    villain_name = serializers.SerializerMethodField()
+  
     class Meta:
         model = Fight
-        fields = ['id', 'hero', 'villain', 'result']
+        fields = ['id', 'hero', 'villain', 'result', 'hero_name', 'villain_name']
+
+    def get_hero_name(self, obj):
+        return obj.hero.name if obj.hero else None
+
+    def get_villain_name(self, obj):
+        return obj.villain.name if obj.villain else None
 
 
 class SponsorSerializer(serializers.ModelSerializer):

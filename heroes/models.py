@@ -6,16 +6,28 @@ def upload_to(instance, filename):
     return '{filename}'.format(filename=filename)
 
 
+def upload_to_images(instance, filename):
+    return 'assets/images/heroes/{filename}'.format(filename=filename)
+
+
+def upload_to_screen_url(instance, filename):
+    return 'assets/images/heroes/screen_large_url/{filename}'.format(filename=filename)
+
+
 class Hero(models.Model):
     id = models.IntegerField(unique=True, primary_key=True)
     name = models.CharField(max_length=100)
     age = models.IntegerField(blank=True, null=True)
-    image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    # image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image_url = models.ImageField(
+        upload_to=upload_to_images, blank=True, null=True)
+    # image_screen_large_url = models.ImageField(
+    #     upload_to=upload_to, blank=True, null=True)
     image_screen_large_url = models.ImageField(
-        upload_to=upload_to, blank=True, null=True)
+        upload_to=upload_to_screen_url, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    character_friends = models.JSONField(blank=True, null=True)
-    powers = models.JSONField(blank=True, null=True)
+    character_friends = models.JSONField(blank=True, default=dict)
+    powers = models.JSONField(blank=True, default=dict)
     sponsors = models.JSONField(blank=True, default=dict)
     # Add other basic information fields like gender, description, etc.
 

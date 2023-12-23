@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-izd-s4y1)vgjcf4vl%+&+n*65gvd0(ks%j%#ag6i(8azyf-i@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'guardians-api-dev.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Adjust this to the actual origin of your frontend

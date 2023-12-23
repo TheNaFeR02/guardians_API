@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv('.env.local')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,7 +35,7 @@ SECRET_KEY = 'django-insecure-izd-s4y1)vgjcf4vl%+&+n*65gvd0(ks%j%#ag6i(8azyf-i@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Adjust this to the actual origin of your frontend
@@ -161,26 +165,32 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ----------------- email settings -----------------
+import os
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp-relay.brevo.com"                    # smtp-relay.sendinblue.com
-EMAIL_USE_TLS = False                               # False
-EMAIL_PORT = "587"                    # 587
-EMAIL_HOST_USER = "acunafer.02@gmail.com"               # your email address
-EMAIL_HOST_PASSWORD = "WdTDSQkC67bvLXGZ"       # your password
-DEFAULT_FROM_EMAIL = "acunafer.02@gmail.com"    # email ending with @sendinblue.com
+def get_env_variable(var_name):
+    """ Get the environment variable or return exception """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = f"The {var_name} environment variable is not set"
+        raise EnvironmentError(error_msg)
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# --------------------------------------------------
+EMAIL_BACKEND = get_env_variable("EMAIL_BACKEND")
+EMAIL_HOST = get_env_variable("EMAIL_HOST")
+EMAIL_USE_TLS = get_env_variable("EMAIL_USE_TLS") == "True"
+EMAIL_PORT = get_env_variable("EMAIL_PORT")
+EMAIL_HOST_USER = get_env_variable("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_env_variable("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = get_env_variable("DEFAULT_FROM_EMAIL")
+ACCOUNT_EMAIL_REQUIRED = get_env_variable("ACCOUNT_EMAIL_REQUIRED") == "True"
+ACCOUNT_EMAIL_VERIFICATION = get_env_variable("ACCOUNT_EMAIL_VERIFICATION")
+EMAIL_CONFIRM_REDIRECT_BASE_URL = get_env_variable("EMAIL_CONFIRM_REDIRECT_BASE_URL")
+PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = get_env_variable("PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL")
+AUTH_USER_MODEL = get_env_variable("AUTH_USER_MODEL")
 
-# <EMAIL_CONFIRM_REDIRECT_BASE_URL>/<key>
-EMAIL_CONFIRM_REDIRECT_BASE_URL = \
-    "http://localhost:3000/account-confirm-email/"
 
-# <PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL>/<uidb64>/<token>/
-PASSWORD_RESET_CONFIRM_REDIRECT_BASE_URL = \
-    "http://localhost:3000/password-reset-confirm/"
+
+
 
 AUTH_USER_MODEL = 'authentication.User'
 
